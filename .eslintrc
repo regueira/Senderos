@@ -1,0 +1,33 @@
+{
+  "extends": ["idiomatic"],
+  "rules": {
+    "linebreak-style": 0,
+    "indent": ["error", 4],
+    "semi": ["error", "always"],
+    "one-var": ["error", "never"],
+    "func-names": ["error", "never"]
+  },
+  "globals": {
+    "$": true,
+    "console": true,
+    "require": true,
+    "global": true,
+    "module": true,
+    "document": true,
+    "window": true,
+    "navigator": true,
+    "history": true,
+    "location": true,
+    "ga":true,
+    "setTimeout": true,
+    "Hammer": true,
+    "matchMedia": true,
+    "Image": true
+  },
+  "env": {
+    "es6": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
