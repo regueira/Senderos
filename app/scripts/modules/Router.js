@@ -33,8 +33,7 @@ export default class Router {
             }
         }
 
-        let path = new Path( {
-            path: pathName,
+        let path = new Path( pathName, {
             get: cb
         } );
 
@@ -56,7 +55,6 @@ export default class Router {
             }
         }
 
-        console.log( '404' );
-        //location.href = 'error.html';
+        location.href = 'error.html';
     }
 }

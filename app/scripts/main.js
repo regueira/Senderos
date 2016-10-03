@@ -1,20 +1,3 @@
-/*
-Implementation
-
-var app = new Router({
-    basePath: 'copacoca-cola',
-});
-
-app.get( '/', require( 'controller/home' ) );
-
-app.get( '/', function ( req, res ) {
-} );
-
-response {
-    render: //magia
-}
-*/
-
 import Router from './modules/Router';
 
 var router = new Router();
@@ -22,8 +5,8 @@ var home = document.getElementById( 'home' );
 var profile = document.getElementById( 'profile' );
 var contacto = document.getElementById( 'contacto' );
 
-router.get( '/profile/:id', function( req ) {
-    console.log( 'controller copa', req );
+router.get( '/profile/:id/hola/:sdfsdf', function( req ) {
+    console.log( req );
 } );
 
 router.get( '/contacto', function() {
@@ -35,13 +18,8 @@ router.get( '/', function() {
 } );
 
 
-
-
-
-
-
 profile.onclick = function() {
-    router.navigate( '/profile/12' );
+    router.navigate( '/profile/12/hola/asda' );
 };
 
 contacto.onclick = function() {
