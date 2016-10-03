@@ -5,11 +5,11 @@ var home = document.getElementById( 'home' );
 var profile = document.getElementById( 'profile' );
 var contacto = document.getElementById( 'contacto' );
 
-router.get( '/profile/:id/hola/:sdfsdf', function( req ) {
+router.get( '/profile/:id/hola/:sdf', function( req ) {
     console.log( req );
 } );
 
-router.get( '/contacto', function() {
+router.post( '/contacto', function() {
     console.log( 'controller contacto' );
 } );
 
@@ -23,7 +23,7 @@ profile.onclick = function() {
 };
 
 contacto.onclick = function() {
-    router.navigate( '/contacto' );
+    router.navigate( '/contacto', 'post' );
 };
 
 home.onclick = function() {
