@@ -9,7 +9,7 @@ router.get( '/profile/:id/hola/:sdf', function( req ) {
     console.log( req );
 } );
 
-router.post( '/contacto', function() {
+router.post( '/contacto', function( req, data ) {
     console.log( 'controller contacto' );
 } );
 
