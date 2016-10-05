@@ -4,6 +4,11 @@ import indexController from './controllers/index';
 import profileController from './controllers/profile';
 import contactController from './controllers/contact';
 
+// Configure router
+router.configure ({
+    //verbs : ['get','post']
+})
+
 // Define routes
 router.declareGet( '/profile/:id/hola/:sdf', profileController);
 router.declarePost( '/contacto', contactController );

@@ -1,6 +1,5 @@
 /**
  * Simple Router KO
- *
  */
 import Path from './Path';
 
@@ -30,12 +29,9 @@ export default class Router {
          */
         this.verbs = [ 'get', 'head', 'post', 'put', 'delete', 'trace', 'options', 'connect', 'patch' ];
 
-        for ( let key in options ) {
-            this[ key ] = options[ key ];
-        }
-
-        if ( this.root !== '/' ) {
-            this.root = '/' + this._clearSlashes( this.root ) + '/';
+        // Configure router.
+        if ( options ) {
+            this.configure( options );
         }
 
         //TODO: refactor this window.onpopstate with a custom event.
@@ -43,6 +39,21 @@ export default class Router {
             let path = this._clearSlashes( location.pathname );
             this.navigate( path, 'get', false, false );
         }.bind( this );
+    }
+
+    /**
+     * @public
+     * Configure the router variables.
+     * @param options object
+     */
+    configure( options ) {
+        for ( let key in options ) {
+            this[ key ] = options[ key ];
+        }
+
+        if ( this.root !== '/' ) {
+            this.root = '/' + this._clearSlashes( this.root ) + '/';
+        }
     }
 
     /**
@@ -174,6 +185,7 @@ export default class Router {
             }
         }
 
+        //TODO: remove this error redirect and use events instead.
         location.href = 'error.html';
     }
 
@@ -200,7 +212,7 @@ export default class Router {
      * @param data Objet with the put data
      */
     put( pathName, data ) {
-        return this.navigate( pathName, 'put', data);
+        return this.navigate( pathName, 'put', data );
     }
 }
 
