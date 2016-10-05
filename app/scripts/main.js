@@ -1,31 +1,28 @@
-import Router from './modules/Router';
+import { router } from './modules/Router';
 
-var router = new Router();
+import indexController from './controllers/index';
+import profileController from './controllers/profile';
+import contactController from './controllers/contact';
+
+// Define routes
+router.declareGet( '/profile/:id/hola/:sdf', profileController);
+router.declarePost( '/contacto', contactController );
+router.declareGet( '/', indexController );
+
+
+// Example
 var home = document.getElementById( 'home' );
 var profile = document.getElementById( 'profile' );
 var contacto = document.getElementById( 'contacto' );
 
-router.get( '/profile/:id/hola/:sdf', function( req ) {
-    console.log( req );
-} );
-
-router.post( '/contacto', function( req, data ) {
-    console.log( 'controller contacto' );
-} );
-
-router.get( '/', function() {
-    console.log( 'controller / asdasdasd' );
-} );
-
-
 profile.onclick = function() {
-    router.navigate( '/profile/12/hola/asda' );
+    router.get( '/profile/12/hola/asda' );
 };
 
 contacto.onclick = function() {
-    router.navigate( '/contacto', 'post' );
+    router.post( '/contacto' );
 };
 
 home.onclick = function() {
-    router.navigate( '/' );
+    router.get( '/' );
 };

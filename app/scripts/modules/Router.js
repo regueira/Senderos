@@ -38,9 +38,10 @@ export default class Router {
             this.root = '/' + this._clearSlashes( this.root ) + '/';
         }
 
+        //TODO: refactor this window.onpopstate with a custom event.
         window.onpopstate = function() {
             let path = this._clearSlashes( location.pathname );
-            this.navigate( path, 'get', false );
+            this.navigate( path, 'get', false, false );
         }.bind( this );
     }
 
@@ -66,12 +67,13 @@ export default class Router {
      * 'delete', 'trace', 'options', 'connect', 'patch'
      * @param pathName: String/RegExp with the path route.
      * @param cb: Callback to call when a url matches.
+     * @return boolean
      */
     _verb( pathName, verb, cb ) {
 
         if ( this.verbs.indexOf( verb ) < 0 ) {
             //TODO: return a object error.
-            return;
+            return false;
         }
 
         pathName = this._clearSlashes( pathName );
@@ -87,9 +89,7 @@ export default class Router {
             [ verb ]: cb
         } );
 
-        this.routes.push( path );
-
-        return this;
+        return this.routes.push( path ) > 0;
     }
 
     /**
@@ -100,9 +100,10 @@ export default class Router {
      * @param verb: String accepted values: 'get', 'head', 'post', 'put',
      * 'delete', 'trace', 'options', 'connect', 'patch'
      * @param cb: Callback to execute
+     * @return boolean
      */
-    verb( pathName, verb, cb ) {
-        this._verb( pathName, verb.toLowerCase(), cb );
+    declareVerb( pathName, verb, cb ) {
+        return this._verb( pathName, verb.toLowerCase(), cb );
     }
 
     /**
@@ -111,9 +112,10 @@ export default class Router {
      *
      * @param pathName: String/RegExp with the path route.
      * @param cb: Callback to execute
+     * @return boolean
      */
-    get( pathName, cb ) {
-        this._verb( pathName, 'get', cb );
+    declareGet( pathName, cb ) {
+        return this._verb( pathName, 'get', cb );
     }
 
     /**
@@ -122,9 +124,10 @@ export default class Router {
      *
      * @param pathName: String/RegExp with the path route.
      * @param cb: Callback to execute
+     * @return boolean
      */
-    post( pathName, cb ) {
-        this._verb( pathName, 'post', cb );
+    declarePost( pathName, cb ) {
+        return this._verb( pathName, 'post', cb );
     }
 
     /**
@@ -133,9 +136,10 @@ export default class Router {
      *
      * @param pathName: String/RegExp with the path route.
      * @param cb: Callback to execute
+     * @return boolean
      */
-    put( pathName, cb ) {
-        this._verb( pathName, 'put', cb );
+    declarePut( pathName, cb ) {
+        return this._verb( pathName, 'put', cb );
     }
 
     /**
@@ -163,11 +167,41 @@ export default class Router {
                 }
 
                 // Send to the callback the url parameters and the object data
-                this.routes[ i ][ verb ]( this.routes[ i ].params, data );
-                return true;
+                if ( this.routes[ i ][ verb ] ) {
+                    this.routes[ i ][ verb ]( this.routes[ i ].params, data );
+                    return true;
+                }
             }
         }
 
         location.href = 'error.html';
     }
+
+    /**
+     * A convenient way to navigate with the get verb
+     * @param pathName String with the url to navigate.
+     */
+    get( pathName ) {
+        return this.navigate( pathName );
+    }
+
+    /**
+     * A convenient way to navigate with the post verb
+     * @param pathName String with the url to navigate.
+     * @param data Objet with the post data
+     */
+    post( pathName, data ) {
+        return this.navigate( pathName, 'post', data );
+    }
+
+    /**
+     * A convenient way to navigate with the put verb
+     * @param pathName String with the url to navigate.
+     * @param data Objet with the put data
+     */
+    put( pathName, data ) {
+        return this.navigate( pathName, 'put', data);
+    }
 }
+
+export let router = new Router();

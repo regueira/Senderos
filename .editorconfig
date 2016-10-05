@@ -10,10 +10,10 @@ indent_style = space
 indent_size = 4
 
 #Unix
-#end_of_line = lf
+end_of_line = lf
 
 #for Windows
-end_of_line = crlf
+#end_of_line = crlf
 
 # we recommend you to keep these unchanged
 charset = utf-8
