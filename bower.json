@@ -1,7 +1,7 @@
 {
-  "name": "router",
+  "name": "Router",
   "description": "",
-  "main": "index.js",
+  "main": "lib/Router.js",
   "authors": [
     "Martín Palmieri",
     "Sebastián Regueira",
@@ -18,6 +18,5 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "^3.1.0"
   }
 }

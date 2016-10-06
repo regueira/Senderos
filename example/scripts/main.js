@@ -1,5 +1,5 @@
-import { router } from './modules/Router';
-import { events } from './modules/handlers/Events';
+import { router } from '../../../lib/Router';
+import { events } from '../../../lib/Events';
 
 
 import indexController from './controllers/index';
@@ -12,13 +12,13 @@ router.configure( {
 } );
 
 // on router success
-events.subscribe( 'router/navigate/success', function ( pathname ) {
+events.subscribe( 'router/navigate/success', function( pathname ) {
     console.log ( pathname );
     console.log('evento success');
 } );
 
 // on router error
-events.subscribe( 'router/navigate/error', function ( pathname ) {
+events.subscribe( 'router/navigate/error', function( pathname ) {
     console.log ( pathname );
     console.log('evento error');
 } );

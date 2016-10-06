@@ -1,4 +1,4 @@
-import { router } from '../modules/Router';
+import { router } from '../../../../lib/Router';
 
 export default function( req ) {
 
