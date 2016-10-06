@@ -23,9 +23,15 @@ class Router {
         /**
          * Default root path
          * @variable String
+         * @Default '/'
          */
         this.root = '/';
 
+        /**
+         * Enable or not the history events.
+         * @variable boolean
+         * @Default true
+         */
         this.hasHistory = true;
 
         /**
@@ -56,6 +62,10 @@ class Router {
         events.publish( 'router/configure/success', this._clearSlashes( location.pathname ) );
     }
 
+    /**
+     * @public
+     * Execute the events for the init process.
+     */
     init() {
         events.publish( 'router/init/success', this._clearSlashes( location.pathname ) );
     }
