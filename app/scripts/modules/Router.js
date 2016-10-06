@@ -3,13 +3,15 @@
  */
 import Path from './Path';
 
-export default class Router {
+import { events } from './handlers/Events';
+
+class Router {
 
     /**
      * creates a new Router instance.
      * @param options
      */
-    constructor( options ) {
+    constructor() {
 
         /**
          * List of routes
@@ -28,17 +30,6 @@ export default class Router {
          * @variable Array
          */
         this.verbs = [ 'get', 'head', 'post', 'put', 'delete', 'trace', 'options', 'connect', 'patch' ];
-
-        // Configure router.
-        if ( options ) {
-            this.configure( options );
-        }
-
-        //TODO: refactor this window.onpopstate with a custom event.
-        window.onpopstate = function() {
-            let path = this._clearSlashes( location.pathname );
-            this.navigate( path, 'get', false, false );
-        }.bind( this );
     }
 
     /**
@@ -54,6 +45,12 @@ export default class Router {
         if ( this.root !== '/' ) {
             this.root = '/' + this._clearSlashes( this.root ) + '/';
         }
+
+        events.publish( 'router/configure/success', this._clearSlashes( location.pathname ) );
+    }
+
+    init() {
+        events.publish( 'router/init/success', this._clearSlashes( location.pathname ) );
     }
 
     /**
@@ -160,33 +157,41 @@ export default class Router {
      * @param pathName: String/RegExp with the path route.
      * @param verb: String accepted values: 'get', 'head', 'post', 'put',
      * 'delete', 'trace', 'options', 'connect', 'patch'
-     * @param data: Object data
-     * @param pushState: change history
-     *
-     * TODO: Remove pushState param and use events
+     * @param data:     Object data
+     * @param options:  Object to set options to the navigate route.
+     *          Example: {
+     *                      isHistory: true
+     *                   }
      */
-    navigate( pathName, verb = 'get', data = {}, pushState = true ) {
+    navigate( pathName, verb = 'get', data = {}, options = {} ) {
         pathName = this._clearSlashes( pathName );
 
         for ( let i = 0; i < this.routes.length; i++ ) {
 
             if ( this.routes[ i ].match( pathName ) ) {
 
-                //TODO: Remove pushState, use events instead
-                if ( pushState ) {
-                    history.pushState( null, null, pathName );
-                }
-
-                // Send to the callback the url parameters and the object data
                 if ( this.routes[ i ][ verb ] ) {
+
+                    let _options = {
+                        pathName: pathName,
+                        verb: verb
+                    };
+
+                    if ( options.isHistory ) {
+                        _options.isHistory = options.isHistory;
+                    }
+
+                    events.publish( 'router/navigate/success', _options );
+
+                    // Send to the callback the url parameters and the object data
                     this.routes[ i ][ verb ]( this.routes[ i ].params, data );
                     return true;
                 }
             }
         }
 
-        //TODO: remove this error redirect and use events instead.
-        location.href = 'error.html';
+        events.publish( 'router/navigate/error', pathName );
+        return false;
     }
 
     /**

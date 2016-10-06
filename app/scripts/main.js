@@ -1,18 +1,35 @@
 import { router } from './modules/Router';
+import { events } from './modules/handlers/Events';
+import { history } from './modules/handlers/History';
 
 import indexController from './controllers/index';
 import profileController from './controllers/profile';
 import contactController from './controllers/contact';
 
 // Configure router
-router.configure ({
+router.configure( {
     //verbs : ['get','post']
-})
+} );
+
+// on router success
+events.subscribe( 'router/navigate/success', function ( pathname ) {
+    console.log ( pathname );
+    console.log('evento success');
+} );
+
+// on router error
+events.subscribe( 'router/navigate/error', function ( pathname ) {
+    console.log ( pathname );
+    console.log('evento error');
+} );
 
 // Define routes
-router.declareGet( '/profile/:id/hola/:sdf', profileController);
-router.declarePost( '/contacto', contactController );
+router.declareGet( '/profile/:id/hola/:sdf', profileController );
+router.declareGet( '/contacto', contactController );
 router.declareGet( '/', indexController );
+
+
+router.init();
 
 
 // Example
@@ -25,7 +42,7 @@ profile.onclick = function() {
 };
 
 contacto.onclick = function() {
-    router.post( '/contacto' );
+    router.get( '/contacto' );
 };
 
 home.onclick = function() {

@@ -1,9 +1,11 @@
 {
-  "name": "scaffold",
+  "name": "router",
   "description": "",
   "main": "index.js",
   "authors": [
-    "Martín Palmieri"
+    "Martín Palmieri",
+    "Sebastián Regueira",
+    "Federico Gomez"
   ],
   "license": "ISC",
   "homepage": "",
