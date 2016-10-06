@@ -4,6 +4,7 @@
 import Path from './Path';
 
 import { events } from './handlers/Events';
+import History from './handlers/History';
 
 class Router {
 
@@ -25,6 +26,8 @@ class Router {
          */
         this.root = '/';
 
+        this.hasHistory = true;
+
         /**
          * List of valid HTTP verbs
          * @variable Array
@@ -44,6 +47,10 @@ class Router {
 
         if ( this.root !== '/' ) {
             this.root = '/' + this._clearSlashes( this.root ) + '/';
+        }
+
+        if ( this.hasHistory ) {
+            this.history = new History();
         }
 
         events.publish( 'router/configure/success', this._clearSlashes( location.pathname ) );

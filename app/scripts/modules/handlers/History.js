@@ -5,7 +5,7 @@
 import { events } from './Events';
 import { router } from '../Router';
 
-class HistoryEvents {
+export default class HistoryEvents {
 
     /**
      * Subscribe to events
@@ -39,5 +39,3 @@ class HistoryEvents {
         }
     }
 }
-
-export let historyHandler = new HistoryEvents();

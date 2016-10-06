@@ -1,6 +1,6 @@
 import { router } from './modules/Router';
 import { events } from './modules/handlers/Events';
-import { history } from './modules/handlers/History';
+
 
 import indexController from './controllers/index';
 import profileController from './controllers/profile';
@@ -8,7 +8,7 @@ import contactController from './controllers/contact';
 
 // Configure router
 router.configure( {
-    //verbs : ['get','post']
+    //verbs : ['get','post'],
 } );
 
 // on router success
