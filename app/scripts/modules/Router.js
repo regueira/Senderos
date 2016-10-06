@@ -191,7 +191,8 @@ class Router {
 
                     let _options = {
                         pathName: pathName,
-                        verb: verb
+                        verb: verb,
+                        data: data
                     };
 
                     if ( options.isHistory ) {
