@@ -38,11 +38,17 @@ router.init();
 // Example
 var home = document.getElementById( 'home' );
 var profile = document.getElementById( 'profile' );
+var profile2 = document.getElementById( 'profile2' );
 var contacto = document.getElementById( 'contacto' );
 
 profile.onclick = function() {
     router.get( '/profile/123/hola/123?hola=aaa&chau=bbbb#lalala' );
 };
+
+profile2.onclick = function() {
+    router.get( '/profile/1/hola' );
+};
+
 
 contacto.onclick = function() {
     router.get( '/contacto?hola=123' );
