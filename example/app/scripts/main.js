@@ -6,6 +6,8 @@ import indexController from './controllers/index';
 import profileController from './controllers/profile';
 import contactController from './controllers/contact';
 
+import bootstrap from './bootstrap';
+
 // Configure router
 router.configure( {
     //verbs : ['get','post'],
@@ -24,10 +26,11 @@ events.subscribe( 'router/navigate/error', function( pathname ) {
 } );
 
 // Define routes
-router.declareGet( '/profile/:id/hola/:sdf', profileController );
+router.declareGet( '/profile/:id/hola/:sdf?', profileController );
 router.declareGet( '/contacto', contactController );
 router.declareGet( '/', indexController );
 
+events.subscribe( 'router/init/success', bootstrap );
 
 router.init();
 
@@ -38,11 +41,11 @@ var profile = document.getElementById( 'profile' );
 var contacto = document.getElementById( 'contacto' );
 
 profile.onclick = function() {
-    router.get( '/profile/12/hola/asda' );
+    router.get( '/profile/123/hola/123?hola=aaa&chau=bbbb#lalala' );
 };
 
 contacto.onclick = function() {
-    router.get( '/contacto' );
+    router.get( '/contacto?hola=123' );
 };
 
 home.onclick = function() {
