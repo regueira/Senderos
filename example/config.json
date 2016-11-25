@@ -1,0 +1,15 @@
+{
+    "temp": ".tmp",
+    "app": {
+        "root": "app",
+        "scripts": "app/scripts",
+        "lib": "../lib",
+        "styles": "app/styles",
+        "templates": "app/templates",
+        "statics": "app/statics",
+        "images": "app/images",
+        "fonts": "app/fonts",
+        "fav": "app/fav"
+    },
+    "build": "dist"
+}
