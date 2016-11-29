@@ -4,11 +4,10 @@
   "main": "lib/Router.js",
   "authors": [
     "Martín Palmieri",
-    "Sebastián Regueira",
-    "Federico Gomez"
+    "Sebastián Regueira"
   ],
   "license": "ISC",
-  "homepage": "",
+  "homepage": "https://github.com/regueira/router",
   "private": true,
   "ignore": [
     "**/.*",
