@@ -1,4 +1,4 @@
-import { router } from '../../../../lib/Router';
+import { router } from '../../../../lib/Dispatcher';
 
 export default function( req, data ) {
     console.log( 'controller contacto' );

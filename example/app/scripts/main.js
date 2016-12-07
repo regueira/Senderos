@@ -1,4 +1,4 @@
-import { router } from '../../../lib/Router';
+import { dispatcher } from '../../../lib/Dispatcher';
 import { events } from '../../../lib/Events';
 
 
@@ -6,33 +6,40 @@ import indexController from './controllers/index';
 import profileController from './controllers/profile';
 import contactController from './controllers/contact';
 
-import bootstrap from './bootstrap';
+//import bootstrap from './bootstrap';
 
-// Configure router
-router.configure( {
-    //verbs : ['get','post'],
-} );
+// Configure RootPath variable.
+dispatcher.rootPath = '/';
+
 
 // on router success
-events.subscribe( 'router/navigate/success', function( pathname ) {
+events.subscribe( 'dispatcher/navigate/success', function( pathname ) {
     console.log ( pathname );
     console.log('evento success');
 } );
 
 // on router error
-events.subscribe( 'router/navigate/error', function( pathname ) {
+events.subscribe( 'dispatcher/navigate/error', function( pathname ) {
     console.log ( pathname );
     console.log('evento error');
 } );
 
 // Define routes
-router.declareGet( '/profile/:id/hola/:sdf?', profileController );
-router.declareGet( '/contacto', contactController );
-router.declareGet( '/', indexController );
+dispatcher.setDispatch( '/profile/:id/hola/:sdf?', profileController );
+dispatcher.setDispatch( '/contacto', contactController );
+dispatcher.setDispatch( '/', indexController );
 
-events.subscribe( 'router/init/success', bootstrap );
-
-router.init();
+// Execute init
+dispatcher.init(
+    function( req, data, next ) {
+        console.log( 'Init 1' );
+        next();
+    },
+    function( req, data, next ) {
+        console.log( 'Init 2' );
+        next();
+    }
+);
 
 
 // Example
@@ -42,18 +49,18 @@ var profile2 = document.getElementById( 'profile2' );
 var contacto = document.getElementById( 'contacto' );
 
 profile.onclick = function() {
-    router.get( '/profile/123/hola/123?hola=aaa&chau=bbbb#lalala' );
+    dispatcher.dispatch( '/profile/123/hola/123?hola=aaa&chau=bbbb#lalala' );
 };
 
 profile2.onclick = function() {
-    router.get( '/profile/1/hola' );
+    dispatcher.dispatch( '/profile/1/hola' );
 };
 
 
 contacto.onclick = function() {
-    router.get( '/contacto?hola=123' );
+    dispatcher.dispatch( '/contacto?hola=123' );
 };
 
 home.onclick = function() {
-    router.get( '/' );
+    dispatcher.dispatch( '/' );
 };
