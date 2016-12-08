@@ -1,0 +1,24 @@
+{
+  "name": "dispatcher",
+  "version": "0.2.0",
+  "description": "Dispatcher for JS",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regueira/Dispatcher.git"
+  },
+  "author": "Sebastian Regueira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/regueira/Dispatcher/issues"
+  },
+  "homepage": "https://github.com/regueira/Dispatcher#readme"
+}

@@ -1,6 +1,6 @@
 import { router } from '../../../../lib/Dispatcher';
 
-export default function( req ) {
+export default function( req, data, next ) {
     console.log( 'controller profile' );
     console.log( req );
 }

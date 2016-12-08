@@ -25,17 +25,19 @@ events.subscribe( 'dispatcher/navigate/error', function( pathname ) {
 } );
 
 // Define routes
-dispatcher.setDispatch( '/profile/:id/hola/:sdf?', profileController );
-dispatcher.setDispatch( '/contacto', contactController );
-dispatcher.setDispatch( '/', indexController );
+dispatcher.declare( '/profile/:id/hola/:sdf?', profileController );
+dispatcher.declare( '/contacto', contactController );
+dispatcher.declare( '/', indexController );
 
 // Execute init
 dispatcher.init(
     function( req, data, next ) {
+        data.info = 'lalalal';
         console.log( 'Init 1' );
         next();
     },
     function( req, data, next ) {
+        console.log( data );
         console.log( 'Init 2' );
         next();
     }
