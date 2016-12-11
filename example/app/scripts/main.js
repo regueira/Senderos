@@ -24,8 +24,15 @@ events.subscribe( 'dispatcher/navigate/error', function( pathname ) {
     console.log('evento error');
 } );
 
+// on router error
+events.subscribe( 'dispatcher/navigate/notFound', function( pathname ) {
+    console.log ( pathname );
+    console.log('evento notFound');
+} );
+
+
 // Define routes
-dispatcher.declare( '/profile/:id/hola/:sdf?', profileController );
+dispatcher.declare( '/profile/:id/hola/:sdf?', profileController, contactController );
 dispatcher.declare( '/contacto', contactController );
 dispatcher.declare( '/', indexController );
 
