@@ -1,5 +1,5 @@
-import { dispatcher } from '../../../lib/Dispatcher';
-import { events } from '../../../lib/Events';
+import dispatcher from '../../../lib/Dispatcher';
+import events from '../../../lib/Events';
 
 
 import indexController from './controllers/index';
