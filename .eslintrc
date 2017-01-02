@@ -22,7 +22,11 @@
     "setTimeout": true,
     "Hammer": true,
     "matchMedia": true,
-    "Image": true
+    "Image": true,
+    "describe": true,
+    "it": true,
+    "expect": true,
+    "fail": true
   },
   "env": {
     "es6": true
