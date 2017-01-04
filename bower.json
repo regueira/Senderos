@@ -1,20 +1,21 @@
 {
-  "name": "router",
-  "description": "",
-  "main": "lib/Router.js",
+  "name": "bower",
+  "description": "lightweight JavaScript dispatcher.",
+  "main": "lib/Dispatcher.js",
   "authors": [
-    "Martín Palmieri",
-    "Sebastián Regueira"
+    { "name": "Sebastián Regueira" },
+    { "name": "Martín Palmieri" }
   ],
   "license": "ISC",
-  "homepage": "https://github.com/regueira/router",
-  "private": true,
+  "homepage": "https://github.com/regueira/Senderos",
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "spec"
   ],
   "dependencies": {
   }
