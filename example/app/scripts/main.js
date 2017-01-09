@@ -33,7 +33,8 @@ events.subscribe( 'dispatcher/navigate/notFound', function( pathname ) {
 
 // Define routes
 dispatcher.declare( '/profile/:id/hola/:sdf?', profileController, contactController );
-dispatcher.declare( '/contacto', contactController );
+dispatcher.declare( { path: '/contacto', context: 'get', history: true }, contactController );
+dispatcher.declare( { path: '/contacto', context: 'save', history: false }, contactController );
 dispatcher.declare( '/', indexController );
 
 // Execute init
@@ -56,18 +57,23 @@ var home = document.getElementById( 'home' );
 var profile = document.getElementById( 'profile' );
 var profile2 = document.getElementById( 'profile2' );
 var contacto = document.getElementById( 'contacto' );
+var contacto2 = document.getElementById( 'contacto2' );
 
 profile.onclick = function() {
     dispatcher.dispatch( '/profile/123/hola/123?hola=aaa&chau=bbbb#lalala' );
 };
 
 profile2.onclick = function() {
-    dispatcher.dispatch( '/profile/1/hola' );
+    dispatcher.dispatch( { path: '/profile/1/hola', history: false } );
 };
 
 
 contacto.onclick = function() {
     dispatcher.dispatch( '/contacto?hola=123' );
+};
+
+contacto2.onclick = function() {
+    dispatcher.dispatch( { path: '/contacto?hola=123', context: 'save' } );
 };
 
 home.onclick = function() {
